@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CaricomInvest | Caribbean Private Equity</title>
+    <style>
+        :root {
+            --primary: #00395b;
+            --secondary: #e8a012;
+            --accent: #1db3e2;
+            --light: #f4f9fc;
+            --dark: #0d2436;
+            --white: #ffffff;
+            --gray: #6c7983;
+            --border: #e1e8ed;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Arial', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background-color: #d18c00;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--white);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(13, 36, 54, 0.8), rgba(13, 36, 54, 0.9)), url('https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--white);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        /* About Section */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-light {
+            background-color: var(--light);
+        }
+        
+        .section-dark {
+            background-color: var(--dark);
+            color: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .section-dark .section-title h2 {
+            color: var(--white);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        /* Strategy Section */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .strategy-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .strategy-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .strategy-icon {
+            margin-bottom: 20px;
+            font-size: 48px;
+            color: var(--secondary);
+        }
+        
+        .strategy-item h3 {
+            margin-bottom: 15px;
+        }
+        
+        /* Investment Focus */
+        .investment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .investment-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .investment-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .investment-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        
+        .investment-content {
+            padding: 30px;
+        }
+        
+        .investment-content h3 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-member img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 25px;
+        }
+        
+        .team-info h3 {
+            margin-bottom: 5px;
+            font-size: 22px;
+        }
+        
+        .team-info .position {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(rgba(13, 36, 54, 0.9), rgba(13, 36, 54, 0.9)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 80px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .stat-item p {
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            margin-right: 15px;
+            font-size: 20px;
+            color: var(--secondary);
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--white);
+            margin-bottom: 25px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #b9c5d0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #b9c5d0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .strategy-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Caricom<span>Invest</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#strategy">Strategy</a></li>
+                    <li><a href="#investment">Investments</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1>Unlocking Caribbean Growth Potential</h1>
+            <p>CaricomInvest is a leading private equity firm focused exclusively on the Caribbean region, connecting capital with opportunity to create sustainable growth.</p>
+            <a href="#contact" class="btn">Connect With Us</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Us</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Building Sustainable Value in the Caribbean</h3>
+                    <p>Founded in 2018, CaricomInvest is dedicated to identifying, investing in, and nurturing high-potential businesses across the Caribbean region. We combine deep local expertise with global perspectives to create exceptional value for our investors and portfolio companies.</p>
+                    <p>Our investment approach is characterized by discipline, rigor, and a commitment to sustainable development. We partner with management teams who share our vision for growth and operational excellence.</p>
+                    <a href="#strategy" class="btn btn-outline" style="margin-top: 20px;">Our Strategy</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Caribbean Business">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategy Section -->
+    <section id="strategy" class="section section-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Investment Strategy</h2>
+            </div>
+            <div class="strategy-grid">
+                <div class="strategy-item">
+                    <div class="strategy-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Identify</h3>
+                    <p>We identify businesses with strong growth potential, defensible market positions, and opportunities for operational improvement.</p>
+                </div>
+                <div class="strategy-item">
+                    <div class="strategy-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Transform</h3>
+                    <p>We work closely with management teams to implement value creation initiatives, enhance operational efficiency, and drive sustainable growth.</p>
+                </div>
+                <div class="strategy-item">
+                    <div class="strategy-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Realize</h3>
+                    <p>We create multiple exit pathways for our investments, ensuring optimal returns for our investors while positioning businesses for long-term success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>$250M+</h3>
+                    <p>Assets Under Management</p>
+                </div>
+                <div class="stat-item">
+                    <h3>18</h3>
+                    <p>Portfolio Companies</p>
+                </div>
+                <div class="stat-item">
+                    <h3>12</h3>
+                    <p>Countries</p>
+                </div>
+                <div class="stat-item">
+                    <h3>25%</h3>
+                    <p>Average IRR</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Focus -->
+    <section id="investment" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Investment Focus</h2>
+            </div>
+            <div class="investment-grid">
+                <div class="investment-item">
+                    <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tourism & Hospitality">
+                    <div class="investment-content">
+                        <h3>Tourism & Hospitality</h3>
+                        <p>We invest in innovative hospitality concepts, boutique resorts, and sustainable tourism infrastructure that enhance the Caribbean's competitive advantage while preserving its natural beauty.</p>
+                    </div>
+                </div>
+                <div class="investment-item">
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Renewable Energy">
+                    <div class="investment-content">
+                        <h3>Renewable Energy</h3>
+                        <p>We support projects in solar, wind, and other renewable energy sources that reduce the region's dependence on imported fossil fuels and build climate resilience.</p>
+                    </div>
+                </div>
+                <div class="investment-item">
+                    <img src="https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Agribusiness">
+                    <div class="investment-content">
+                        <h3>Agribusiness & Food Security</h3>
+                        <p>We invest in agricultural innovation, food processing, and supply chain improvements that enhance food security and create export opportunities for Caribbean producers.</p>
+                    </div>
+                </div>
+                <div class="investment-item">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Digital Infrastructure">
+                    <div class="investment-content">
+                        <h3>Digital Infrastructure</h3>
+                        <p>We focus on technological solutions that overcome the challenges of island economies, from fintech innovations to remote work infrastructure and digital services.</p>
+                    </div>
+                </div>
+                <div class="investment-item">
+                    <img src="https://images.unsplash.com/photo-1565031491910-e57fac031c41?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Climate Resilience">
+                    <div class="investment-content">
+                        <h3>Climate Resilience</h3>
+                        <p>We invest in coastal protection systems, water management solutions, and disaster-resistant infrastructure that help Caribbean nations adapt to climate change challenges.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section section-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Leadership Team</h2>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="James Wilson">
+                    <div class="team-info">
+                        <h3>James Wilson</h3>
+                        <span class="position">Managing Partner</span>
+                        <p>With over 25 years of investment experience and deep connections throughout the Caribbean financial ecosystem, James leads our firm's strategic direction and investment decisions.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Maria Rodriguez">
+                    <div class="team-info">
+                        <h3>Maria Rodriguez</h3>
+                        <span class="position">Investment Director</span>
+                        <p>Former advisor to CARICOM on economic development with extensive expertise in sustainable tourism investments and renewable energy projects across the region.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="David Johnson">
+                    <div class="team-info">
+                        <h3>David Johnson</h3>
+                        <span class="position">Operations Partner</span>
+                        <p>Specializes in operational improvements and business transformation across multiple industries, with particular expertise in tourism, agriculture, and manufacturing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <p><strong>Headquarters</strong></p>
+                            <p>Harbour View Complex, Bay Street<br>Bridgetown, Barbados</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <p><strong>Phone</strong></p>
+                            <p>+1 (246) 555-7890</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p><strong>Email</strong></p>
+                            <p>info@caricominvest.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <p><strong>Office Hours</strong></p>
+                            <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CaricomInvest</h3>
+                    <p>A premier private equity firm dedicated to unlocking the potential of Caribbean businesses and supporting regional economic development through strategic investments.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#strategy">Strategy</a></li>
+                        <li><a href="#investment">Investments</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Investment Areas</h3>
+                    <ul>
+                        <li><a href="#">Tourism & Hospitality</a></li>
+                        <li><a href="#">Renewable Energy</a></li>
+                        <li><a href="#">Agribusiness & Food Security</a></li>
+                        <li><a href="#">Digital Infrastructure</a></li>
+                        <li><a href="#">Climate Resilience</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                        <li><a href="#">Investor Login</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CaricomInvest. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
