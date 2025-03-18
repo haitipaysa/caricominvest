@@ -550,6 +550,39 @@
             resize: vertical;
         }
         
+        /* Form success message */
+        .form-success {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        /* Form loading indicator */
+        .form-loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .form-loading .spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(0,0,0,0.1);
+            border-radius: 50%;
+            border-top-color: var(--secondary);
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
         /* Footer */
         footer {
             background-color: var(--dark);
@@ -890,7 +923,7 @@
                         </div>
                     </div>
                     <div class="team-member">
-                        <img src="images/pascale.jpg">
+                        <img src="images/pascale.jpg" alt="Pascale Elie">
                         <div class="team-info">
                             <h3>Pascale Elie</h3>
                             <span class="position">Managing Partner & Fintech Innovation Lead</span>
@@ -917,11 +950,11 @@
                             <h3>Georges Andy René</h3>
                             <span class="position">Legal Counsel & Investment Facilitation Director</span>
                             <p>Attorney and investment consultant with extensive experience in business law and trade environments across the Caribbean. Specializes in navigating complex regulatory frameworks and facilitating cross-border investments in developing markets. Known for his result-oriented approach, he provides critical expertise in business enabling environments while ensuring legal compliance for portfolio companies and investment transactions.</p>
-                        <div class="social-links">
-                            <a href="https://www.linkedin.com/in/georgesandyrene/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/georgesandyrene/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </section>
@@ -973,21 +1006,33 @@
                         </div>
                     </div>
                     <div class="contact-form">
-                        <form>
+                        <!-- Cloudflare-based Contact Form -->
+                        <form id="contact-form" action="/submit-form" method="POST">
                             <div class="form-group">
-                                <input type="text" placeholder="Your Name" required>
+                                <input type="text" name="name" id="name" placeholder="Your Name" required>
                             </div>
                             <div class="form-group">
-                                <input type="email" placeholder="Your Email" required>
+                                <input type="email" name="email" id="email" placeholder="Your Email" required>
                             </div>
                             <div class="form-group">
-                                <input type="text" placeholder="Subject">
+                                <input type="text" name="subject" id="subject" placeholder="Subject">
                             </div>
                             <div class="form-group">
-                                <textarea placeholder="Your Message" required></textarea>
+                                <textarea name="message" id="message" placeholder="Your Message" required></textarea>
                             </div>
                             <button type="submit" class="btn">Send Message</button>
                         </form>
+                        
+                        <!-- Loading indicator -->
+                        <div class="form-loading" id="form-loading">
+                            <div class="spinner"></div>
+                            <span>Sending your message...</span>
+                        </div>
+                        
+                        <!-- Success message -->
+                        <div class="form-success" id="form-success">
+                            Your message has been sent successfully! We'll get back to you as soon as possible.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1079,6 +1124,61 @@
                 document.getElementById('password-protection').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
             }
+        });
+    </script>
+
+    <!-- Contact Form Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if URL contains success message parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('message') === 'success') {
+                document.getElementById('form-success').style.display = 'block';
+                // Scroll to contact section
+                document.getElementById('contact').scrollIntoView();
+            }
+            
+            // Handle form submission with fetch API
+            const contactForm = document.getElementById('contact-form');
+            const formLoading = document.getElementById('form-loading');
+            const formSuccess = document.getElementById('form-success');
+            
+            contactForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                
+                // Show loading indicator
+                formLoading.style.display = 'block';
+                
+                try {
+                    // Get form data
+                    const formData = new FormData(contactForm);
+                    
+                    // Send form data to Cloudflare Pages function
+                    const response = await fetch('/submit-form', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    // Hide loading indicator
+                    formLoading.style.display = 'none';
+                    
+                    if (response.ok) {
+                        // Show success message
+                        formSuccess.style.display = 'block';
+                        // Reset form
+                        contactForm.reset();
+                    } else {
+                        // Show error
+                        alert('There was a problem sending your message. Please try again later.');
+                    }
+                } catch (error) {
+                    // Hide loading indicator
+                    formLoading.style.display = 'none';
+                    // Show error
+                    alert('There was a problem sending your message. Please try again later.');
+                    console.error('Form submission error:', error);
+                }
+            });
         });
     </script>
 
